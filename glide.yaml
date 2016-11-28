@@ -1,0 +1,3 @@
+package: github.com/roistat/clickhouse-munin
+import:
+- package: github.com/roistat/go-clickhouse

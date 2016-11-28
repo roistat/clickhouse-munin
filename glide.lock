@@ -1,0 +1,6 @@
+hash: 0f52da8528220a56814d1238cb7c24a109bb0814a68c4bbb1a36cd09c8655d25
+updated: 2016-11-28T13:58:56.467468424+03:00
+imports:
+- name: github.com/roistat/go-clickhouse
+  version: b9fe2e53617ad29318999c0f734ec0c8f642a3d0
+testImports: []
