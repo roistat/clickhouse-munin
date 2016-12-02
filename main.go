@@ -2,9 +2,9 @@ package main
 
 import (
     "fmt"
+    "github.com/roistat/go-clickhouse"
     "os"
     "strings"
-    "github.com/roistat/go-clickhouse"
 )
 
 func main() {
@@ -15,7 +15,7 @@ func main() {
         os.Exit(1)
     }
 
-    if (action == "config") {
+    if action == "config" {
         renderWidgetConfig(widget)
     } else {
         renderWidgetData(widget)
@@ -81,11 +81,11 @@ func parseOptions() (string, string) {
     widgetName := "queries"
     action := "data"
     args := os.Args
-    if (len(args) > 1) {
+    if len(args) > 1 {
         action = args[1]
     }
     nameParts := strings.Split(args[0], "_")
-    if (len(nameParts) > 1) {
+    if len(nameParts) > 1 {
         widgetName = nameParts[1]
     }
     return widgetName, action
