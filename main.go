@@ -12,6 +12,7 @@ type MetricConfig struct {
     metric_type string
     draw_type string
     color string
+    clickhouseEvent string
 }
 
 type Widget struct {
@@ -39,6 +40,7 @@ var availableWidgets = map[string]Widget{
                 metric_type: "DERIVE",
                 draw_type: "AREA",
                 color: "COLOUR0",
+                clickhouseEvent: "SelectQuery",
             },
             MetricConfig{
                 id: "insert",
@@ -46,6 +48,7 @@ var availableWidgets = map[string]Widget{
                 metric_type: "DERIVE",
                 draw_type: "STACK",
                 color: "COLOUR1",
+                clickhouseEvent: "InsertQuery",
             },
         },
     },
@@ -87,7 +90,9 @@ graph_args %s
 
 func renderWidgetData(w Widget) {
     stats := loadClickHouseStats()
-    fmt.Printf("RenderWidgetData: %o %d\n", w, stats["Query"])
+    for _, m := range w.metrics {
+        fmt.Printf("%s.value %d\n", m.id, stats[m.clickhouseEvent])
+    }
 
 }
 
