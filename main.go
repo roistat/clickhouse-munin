@@ -8,29 +8,29 @@ import (
 )
 
 func main() {
-    widgetName, action := parseOptions()
-    widget, ok := AvailableWidgets[widgetName]
+    graphName, action := parseOptions()
+    graph, ok := AvailableGraphs[graphName]
     if !ok {
-        fmt.Printf("Invalid widget name: %s", widgetName)
+        fmt.Printf("Invalid graph name: %s", graphName)
         os.Exit(1)
     }
 
     if action == "config" {
-        renderWidgetConfig(widget)
+        renderGraphConfig(graph)
     } else {
-        renderWidgetData(widget)
+        renderGraphData(graph)
     }
 }
 
-func renderWidgetConfig(w Widget) {
+func renderGraphConfig(g Graph) {
     fmt.Printf(`graph_title %s
 graph_category %s
 graph_info %s
 graph_vlabel %s
 graph_period %s
 graph_args %s
-`, w.graphTitle, w.graphCategory, w.graphInfo, w.graphLabel, w.graphPeriod, w.graphArgs)
-    for _, m := range w.metrics {
+`, g.graphTitle, g.graphCategory, g.graphInfo, g.graphLabel, g.graphPeriod, g.graphArgs)
+    for _, m := range g.metrics {
         fmt.Printf(`
 %s.label %s
 %s.type %s
@@ -41,17 +41,17 @@ graph_args %s
     }
 }
 
-func renderWidgetData(w Widget) {
+func renderGraphData(g Graph) {
     stats := loadClickHouseStats()
     total := 0
-    if w.isPercent {
-        for _, m := range w.metrics {
+    if g.isPercent {
+        for _, m := range g.metrics {
             total = total + stats[m.clickHouseEvent]
         }
     }
-    for _, m := range w.metrics {
+    for _, m := range g.metrics {
         value := stats[m.clickHouseEvent]
-        if w.isPercent {
+        if g.isPercent {
             calcValue := float64(value) / float64(total) * float64(100)
             formattedValue := fmt.Sprintf("%.2f", calcValue)
             fmt.Printf("%s.value %s\n", m.id, formattedValue)
@@ -78,7 +78,7 @@ func loadClickHouseStats() map[string]int {
 }
 
 func parseOptions() (string, string) {
-    widgetName := "queries"
+    graphName := "queries"
     action := "data"
     args := os.Args
     if len(args) > 1 {
@@ -86,7 +86,7 @@ func parseOptions() (string, string) {
     }
     nameParts := strings.Split(args[0], "_")
     if len(nameParts) > 1 {
-        widgetName = nameParts[1]
+        graphName = nameParts[1]
     }
-    return widgetName, action
+    return graphName, action
 }

@@ -1,5 +1,6 @@
 package main
 
+// MetricConfig is one line on graph
 type MetricConfig struct {
     id              string
     label           string
@@ -9,7 +10,8 @@ type MetricConfig struct {
     clickHouseEvent string
 }
 
-type Widget struct {
+// Graph itself
+type Graph struct {
     graphTitle    string
     graphCategory string
     graphInfo     string
@@ -20,7 +22,8 @@ type Widget struct {
     metrics       []MetricConfig
 }
 
-var AvailableWidgets = map[string]Widget{
+// AvailableGraphs is list of available graphs
+var AvailableGraphs = map[string]Graph{
     "queries": {
         graphTitle:    "ClickHouse queries",
         graphCategory: "clickhouse",
