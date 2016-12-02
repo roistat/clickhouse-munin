@@ -28,8 +28,8 @@ var AvailableGraphs = map[string]Graph{
 		graphTitle:    "ClickHouse queries",
 		graphCategory: "clickhouse",
 		graphInfo:     "Values received from ClickHouse system.events table",
-		graphLabel:    "queries / second",
-		graphPeriod:   "second",
+		graphLabel:    "queries / minute",
+		graphPeriod:   "minute",
 		graphArgs:     "--lower-limit 0",
 		metrics: []MetricConfig{
 			{
@@ -107,8 +107,8 @@ var AvailableGraphs = map[string]Graph{
 		graphTitle:    "ClickHouse Zookeeper transactions",
 		graphCategory: "clickhouse",
 		graphInfo:     "Values received from ClickHouse system.events table",
-		graphLabel:    "operations / second",
-		graphPeriod:   "second",
+		graphLabel:    "operations / minute",
+		graphPeriod:   "minute",
 		graphArgs:     "--lower-limit 0",
 		metrics: []MetricConfig{
 			{

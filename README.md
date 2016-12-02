@@ -28,3 +28,9 @@ cp bin/clickhouse_ /etc/munin/plugins/clickhouse_cache
 cp bin/clickhouse_ /etc/munin/plugins/clickhouse_zookeeper
 ```
 
+## Build instructions
+
+```bash
+glide install
+go build -o bin/clickhouse_
+```
