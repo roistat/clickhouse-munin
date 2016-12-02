@@ -26,38 +26,11 @@ type Widget struct {
     metrics []MetricConfig
 }
 
-var availableWidgets = map[string]Widget{
-    "queries": Widget{
-        graph_title: "ClickHouse queries",
-        graph_category: "clickhouse",
-        graph_info: "Values received from ClickHouse system.events table",
-        graph_vlabel: "queries / second",
-        graph_period: "second",
-        graph_args: "--lower-limit 0",
-        metrics: []MetricConfig{
-            MetricConfig{
-                id: "select",
-                label: "Selects",
-                metric_type: "DERIVE",
-                draw_type: "AREA",
-                color: "COLOUR0",
-                clickhouseEvent: "SelectQuery",
-            },
-            MetricConfig{
-                id: "insert",
-                label: "Inserts",
-                metric_type: "DERIVE",
-                draw_type: "STACK",
-                color: "COLOUR1",
-                clickhouseEvent: "InsertQuery",
-            },
-        },
-    },
-}
+
 
 func main() {
     widgetName, action := parseOptions()
-    widget, ok := availableWidgets[widgetName]
+    widget, ok := AvailableWidgets[widgetName]
     if !ok {
         fmt.Printf("Invalid widget name: %s", widgetName)
         os.Exit(1)
