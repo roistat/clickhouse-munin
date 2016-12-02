@@ -7,7 +7,11 @@ import (
 )
 
 type MetricConfig struct {
-
+    id string
+    label string
+    metric_type string
+    draw_type string
+    color string
 }
 
 type Widget struct {
@@ -28,6 +32,22 @@ var availableWidgets = map[string]Widget{
         graph_vlabel: "queries / second",
         graph_period: "second",
         graph_args: "--lower-limit 0",
+        metrics: []MetricConfig{
+            MetricConfig{
+                id: "select",
+                label: "Selects",
+                metric_type: "DERIVE",
+                draw_type: "AREA",
+                color: "COLOUR0",
+            },
+            MetricConfig{
+                id: "insert",
+                label: "Inserts",
+                metric_type: "DERIVE",
+                draw_type: "STACK",
+                color: "COLOUR1",
+            },
+        },
     },
 }
 
@@ -47,7 +67,22 @@ func main() {
 }
 
 func renderWidgetConfig(w Widget) {
-    fmt.Printf("RenderWidgetConfig: %o\n", w)
+    fmt.Printf(`graph_title %s
+graph_category %s
+graph_info %s
+graph_vlabel %s
+graph_period %s
+graph_args %s
+`, w.graph_title, w.graph_category, w.graph_info, w.graph_vlabel, w.graph_period, w.graph_args)
+    for _, m := range w.metrics {
+        fmt.Printf(`
+%s.label %s
+%s.type %s
+%s.min 0
+%s.draw %s
+%s.colour %s
+`, m.id, m.label, m.id, m.metric_type, m.id, m.id, m.draw_type, m.id, m.color)
+    }
 }
 
 func renderWidgetData(w Widget) {
