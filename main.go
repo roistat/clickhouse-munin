@@ -4,6 +4,7 @@ import (
     "fmt"
     "os"
     "strings"
+    "github.com/roistat/go-clickhouse"
 )
 
 type MetricConfig struct {
@@ -97,11 +98,18 @@ func renderWidgetData(w Widget) {
 }
 
 func loadClickHouseStats() map[string]int {
-    return map[string]int{
-        "Query": 748356,
-        "SelectQuery": 289681,
-        "InsertQuery": 1038037,
+    conn := clickhouse.NewConn("localhost:8123", clickhouse.NewHttpTransport())
+    query := clickhouse.NewQuery("SELECT event, value FROM system.events")
+    iterator := query.Iter(conn)
+    var (
+        event string
+        value int
+    )
+    result := map[string]int{}
+    for iterator.Scan(&event, &value) {
+        result[event] = value
     }
+    return result
 }
 
 func parseOptions() (string, string) {
