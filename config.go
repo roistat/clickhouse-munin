@@ -3,174 +3,174 @@ package main
 type MetricConfig struct {
     id              string
     label           string
-    metric_type     string
-    draw_type       string
+    metricType      string
+    drawType        string
     color           string
-    clickhouseEvent string
+    clickHouseEvent string
 }
 
 type Widget struct {
-    graph_title    string
-    graph_category string
-    graph_info     string
-    graph_vlabel   string
-    graph_period   string
-    graph_args     string
-    is_percent     bool
-    metrics        []MetricConfig
+    graphTitle    string
+    graphCategory string
+    graphInfo     string
+    graphLabel    string
+    graphPeriod   string
+    graphArgs     string
+    isPercent     bool
+    metrics       []MetricConfig
 }
 
 var AvailableWidgets = map[string]Widget{
     "queries": {
-        graph_title:    "ClickHouse queries",
-        graph_category: "clickhouse",
-        graph_info:     "Values received from ClickHouse system.events table",
-        graph_vlabel:   "queries / second",
-        graph_period:   "second",
-        graph_args:     "--lower-limit 0",
+        graphTitle:    "ClickHouse queries",
+        graphCategory: "clickhouse",
+        graphInfo:     "Values received from ClickHouse system.events table",
+        graphLabel:    "queries / second",
+        graphPeriod:   "second",
+        graphArgs:     "--lower-limit 0",
         metrics: []MetricConfig{
             {
                 id:              "select",
                 label:           "Selects",
-                metric_type:     "DERIVE",
-                draw_type:       "AREA",
+                metricType:      "DERIVE",
+                drawType:        "AREA",
                 color:           "COLOUR0",
-                clickhouseEvent: "SelectQuery",
+                clickHouseEvent: "SelectQuery",
             },
             {
                 id:              "insert",
                 label:           "Inserts",
-                metric_type:     "DERIVE",
-                draw_type:       "STACK",
+                metricType:      "DERIVE",
+                drawType:        "STACK",
                 color:           "COLOUR1",
-                clickhouseEvent: "InsertQuery",
+                clickHouseEvent: "InsertQuery",
             },
         },
     },
     "files": {
-        graph_title:    "ClickHouse files",
-        graph_category: "clickhouse",
-        graph_info:     "Values received from ClickHouse system.events table",
-        graph_vlabel:   "operations / second",
-        graph_period:   "second",
-        graph_args:     "--lower-limit 0",
+        graphTitle:    "ClickHouse files",
+        graphCategory: "clickhouse",
+        graphInfo:     "Values received from ClickHouse system.events table",
+        graphLabel:    "operations / second",
+        graphPeriod:   "second",
+        graphArgs:     "--lower-limit 0",
         metrics: []MetricConfig{
             {
                 id:              "file_open",
                 label:           "Opens",
-                metric_type:     "DERIVE",
-                draw_type:       "AREA",
+                metricType:      "DERIVE",
+                drawType:        "AREA",
                 color:           "COLOUR0",
-                clickhouseEvent: "FileOpen",
+                clickHouseEvent: "FileOpen",
             },
             {
                 id:              "seek",
                 label:           "Seeks",
-                metric_type:     "DERIVE",
-                draw_type:       "STACK",
+                metricType:      "DERIVE",
+                drawType:        "STACK",
                 color:           "COLOUR1",
-                clickhouseEvent: "Seek",
+                clickHouseEvent: "Seek",
             },
         },
     },
     "cache": {
-        graph_title:    "ClickHouse cache",
-        graph_category: "clickhouse",
-        graph_info:     "Values received from ClickHouse system.events table",
-        graph_vlabel:   "per second",
-        graph_period:   "second",
-        graph_args:     "-u 100 -l 0 -r --base 1000",
-        is_percent:     true,
+        graphTitle:    "ClickHouse cache",
+        graphCategory: "clickhouse",
+        graphInfo:     "Values received from ClickHouse system.events table",
+        graphLabel:    "per second",
+        graphPeriod:   "second",
+        graphArgs:     "-u 100 -l 0 -r --base 1000",
+        isPercent:     true,
         metrics: []MetricConfig{
             {
                 id:              "hits",
                 label:           "hit ratio",
-                metric_type:     "GAUGE",
-                draw_type:       "AREA",
+                metricType:      "GAUGE",
+                drawType:        "AREA",
                 color:           "COLOUR0",
-                clickhouseEvent: "MarkCacheHits",
+                clickHouseEvent: "MarkCacheHits",
             },
             {
                 id:              "misses",
                 label:           "miss ratio",
-                metric_type:     "GAUGE",
-                draw_type:       "STACK",
+                metricType:      "GAUGE",
+                drawType:        "STACK",
                 color:           "COLOUR1",
-                clickhouseEvent: "MarkCacheMisses",
+                clickHouseEvent: "MarkCacheMisses",
             },
         },
     },
     "zookeeper": {
-        graph_title:    "ClickHouse Zookeeper transactions",
-        graph_category: "clickhouse",
-        graph_info:     "Values received from ClickHouse system.events table",
-        graph_vlabel:   "operations / second",
-        graph_period:   "second",
-        graph_args:     "--lower-limit 0",
+        graphTitle:    "ClickHouse Zookeeper transactions",
+        graphCategory: "clickhouse",
+        graphInfo:     "Values received from ClickHouse system.events table",
+        graphLabel:    "operations / second",
+        graphPeriod:   "second",
+        graphArgs:     "--lower-limit 0",
         metrics: []MetricConfig{
             {
                 id:              "ZooKeeperGetChildren",
                 label:           "ZooKeeperGetChildren",
-                metric_type:     "DERIVE",
-                draw_type:       "AREA",
+                metricType:      "DERIVE",
+                drawType:        "AREA",
                 color:           "COLOUR0",
-                clickhouseEvent: "ZooKeeperGetChildren",
+                clickHouseEvent: "ZooKeeperGetChildren",
             },
             {
                 id:              "ZooKeeperCreate",
                 label:           "ZooKeeperCreate",
-                metric_type:     "DERIVE",
-                draw_type:       "STACK",
+                metricType:      "DERIVE",
+                drawType:        "STACK",
                 color:           "COLOUR1",
-                clickhouseEvent: "ZooKeeperCreate",
+                clickHouseEvent: "ZooKeeperCreate",
             },
             {
                 id:              "ZooKeeperRemove",
                 label:           "ZooKeeperRemove",
-                metric_type:     "DERIVE",
-                draw_type:       "STACK",
+                metricType:      "DERIVE",
+                drawType:        "STACK",
                 color:           "COLOUR2",
-                clickhouseEvent: "ZooKeeperRemove",
+                clickHouseEvent: "ZooKeeperRemove",
             },
             {
                 id:              "ZooKeeperExists",
                 label:           "ZooKeeperExists",
-                metric_type:     "DERIVE",
-                draw_type:       "STACK",
+                metricType:      "DERIVE",
+                drawType:        "STACK",
                 color:           "COLOUR3",
-                clickhouseEvent: "ZooKeeperExists",
+                clickHouseEvent: "ZooKeeperExists",
             },
             {
                 id:              "ZooKeeperGet",
                 label:           "ZooKeeperGet",
-                metric_type:     "DERIVE",
-                draw_type:       "STACK",
+                metricType:      "DERIVE",
+                drawType:        "STACK",
                 color:           "COLOUR4",
-                clickhouseEvent: "ZooKeeperGet",
+                clickHouseEvent: "ZooKeeperGet",
             },
             {
                 id:              "ZooKeeperSet",
                 label:           "ZooKeeperSet",
-                metric_type:     "DERIVE",
-                draw_type:       "STACK",
+                metricType:      "DERIVE",
+                drawType:        "STACK",
                 color:           "COLOUR5",
-                clickhouseEvent: "ZooKeeperSet",
+                clickHouseEvent: "ZooKeeperSet",
             },
             {
                 id:              "ZooKeeperMulti",
                 label:           "ZooKeeperMulti",
-                metric_type:     "DERIVE",
-                draw_type:       "STACK",
+                metricType:      "DERIVE",
+                drawType:        "STACK",
                 color:           "COLOUR6",
-                clickhouseEvent: "ZooKeeperMulti",
+                clickHouseEvent: "ZooKeeperMulti",
             },
             {
                 id:              "ZooKeeperExceptions",
                 label:           "ZooKeeperExceptions",
-                metric_type:     "DERIVE",
-                draw_type:       "STACK",
+                metricType:      "DERIVE",
+                drawType:        "STACK",
                 color:           "COLOUR7",
-                clickhouseEvent: "ZooKeeperExceptions",
+                clickHouseEvent: "ZooKeeperExceptions",
             },
         },
     },

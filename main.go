@@ -29,7 +29,7 @@ graph_info %s
 graph_vlabel %s
 graph_period %s
 graph_args %s
-`, w.graph_title, w.graph_category, w.graph_info, w.graph_vlabel, w.graph_period, w.graph_args)
+`, w.graphTitle, w.graphCategory, w.graphInfo, w.graphLabel, w.graphPeriod, w.graphArgs)
     for _, m := range w.metrics {
         fmt.Printf(`
 %s.label %s
@@ -37,21 +37,21 @@ graph_args %s
 %s.min 0
 %s.draw %s
 %s.colour %s
-`, m.id, m.label, m.id, m.metric_type, m.id, m.id, m.draw_type, m.id, m.color)
+`, m.id, m.label, m.id, m.metricType, m.id, m.id, m.drawType, m.id, m.color)
     }
 }
 
 func renderWidgetData(w Widget) {
     stats := loadClickHouseStats()
     total := 0
-    if w.is_percent {
+    if w.isPercent {
         for _, m := range w.metrics {
-            total = total + stats[m.clickhouseEvent]
+            total = total + stats[m.clickHouseEvent]
         }
     }
     for _, m := range w.metrics {
-        value := stats[m.clickhouseEvent]
-        if w.is_percent {
+        value := stats[m.clickHouseEvent]
+        if w.isPercent {
             calcValue := float64(value) / float64(total) * float64(100)
             formattedValue := fmt.Sprintf("%.2f", calcValue)
             fmt.Printf("%s.value %s\n", m.id, formattedValue)
