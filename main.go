@@ -7,27 +7,6 @@ import (
     "github.com/roistat/go-clickhouse"
 )
 
-type MetricConfig struct {
-    id string
-    label string
-    metric_type string
-    draw_type string
-    color string
-    clickhouseEvent string
-}
-
-type Widget struct {
-    graph_title string
-    graph_category string
-    graph_info string
-    graph_vlabel string
-    graph_period string
-    graph_args string
-    metrics []MetricConfig
-}
-
-
-
 func main() {
     widgetName, action := parseOptions()
     widget, ok := AvailableWidgets[widgetName]
@@ -64,8 +43,21 @@ graph_args %s
 
 func renderWidgetData(w Widget) {
     stats := loadClickHouseStats()
+    total := 0
+    if w.is_percent {
+        for _, m := range w.metrics {
+            total = total + stats[m.clickhouseEvent]
+        }
+    }
     for _, m := range w.metrics {
-        fmt.Printf("%s.value %d\n", m.id, stats[m.clickhouseEvent])
+        value := stats[m.clickhouseEvent]
+        if w.is_percent {
+            calcValue := float64(value) / float64(total) * float64(100)
+            formattedValue := fmt.Sprintf("%.2f", calcValue)
+            fmt.Printf("%s.value %s\n", m.id, formattedValue)
+        } else {
+            fmt.Printf("%s.value %d\n", m.id, value)
+        }
     }
 
 }

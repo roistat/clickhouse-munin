@@ -1,5 +1,25 @@
 package main
 
+type MetricConfig struct {
+    id string
+    label string
+    metric_type string
+    draw_type string
+    color string
+    clickhouseEvent string
+}
+
+type Widget struct {
+    graph_title string
+    graph_category string
+    graph_info string
+    graph_vlabel string
+    graph_period string
+    graph_args string
+    is_percent bool
+    metrics []MetricConfig
+}
+
 var AvailableWidgets = map[string]Widget{
     "queries": Widget{
         graph_title: "ClickHouse queries",
@@ -60,6 +80,7 @@ var AvailableWidgets = map[string]Widget{
         graph_vlabel: "per second",
         graph_period: "second",
         graph_args: "-u 100 -l 0 -r --base 1000",
+        is_percent: true,
         metrics: []MetricConfig{
             MetricConfig{
                 id: "hits",
