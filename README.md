@@ -24,7 +24,7 @@ cp bin/clickhouse_ /etc/munin/plugins/clickhouse_cache
 #### Files operations
 
 ```bash
-cp bin/clickhouse_ /etc/munin/plugins/clickhouse_cache
+cp bin/clickhouse_ /etc/munin/plugins/clickhouse_files
 ```
 
 ![](https://raw.githubusercontent.com/roistat/clickhouse-munin/master/examples/files.png)
