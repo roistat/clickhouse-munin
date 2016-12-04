@@ -11,22 +11,31 @@ Munin plugin for ClickHouse
 cp bin/clickhouse_ /etc/munin/plugins/clickhouse_queries
 ```
 
+![](https://raw.githubusercontent.com/roistat/clickhouse-munin/master/examples/queries.png)
+
 #### Cache hit/miss
 
 ```bash
 cp bin/clickhouse_ /etc/munin/plugins/clickhouse_cache
 ```
 
+![](https://raw.githubusercontent.com/roistat/clickhouse-munin/master/examples/cache.png)
+
 #### Files operations
 
 ```bash
 cp bin/clickhouse_ /etc/munin/plugins/clickhouse_cache
 ```
+
+![](https://raw.githubusercontent.com/roistat/clickhouse-munin/master/examples/files.png)
+
 #### Zookeeper operations
 
 ```bash
 cp bin/clickhouse_ /etc/munin/plugins/clickhouse_zookeeper
 ```
+
+![](https://raw.githubusercontent.com/roistat/clickhouse-munin/master/examples/zookeeper.png)
 
 ## Build instructions
 
