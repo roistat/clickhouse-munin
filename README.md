@@ -37,6 +37,10 @@ cp bin/clickhouse_ /etc/munin/plugins/clickhouse_zookeeper
 
 ![](https://raw.githubusercontent.com/roistat/clickhouse-munin/master/examples/zookeeper.png)
 
+#### Make your own graph
+
+You could add you own graphs in config.go (AvailableGraphs variable)
+
 ## Build instructions
 
 ```bash
