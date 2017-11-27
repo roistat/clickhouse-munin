@@ -45,5 +45,5 @@ You could add you own graphs in config.go (AvailableGraphs variable)
 
 ```bash
 glide install
-go build -o bin/clickhouse_
+GOOS=linux go build -o bin/clickhouse_
 ```

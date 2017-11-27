@@ -63,7 +63,11 @@ func renderGraphData(g Graph) {
 }
 
 func loadClickHouseStats() map[string]int {
-	conn := clickhouse.NewConn("localhost:8123", clickhouse.NewHttpTransport())
+	host := os.Getenv("clickhouse_host")
+	if host == "" {
+		host = "localhost"
+	}
+	conn := clickhouse.NewConn(host+":8123", clickhouse.NewHttpTransport())
 	query := clickhouse.NewQuery("SELECT event, value FROM system.events")
 	iterator := query.Iter(conn)
 	var (
