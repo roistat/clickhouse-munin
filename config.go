@@ -45,7 +45,7 @@ var AvailableGraphs = map[string]Graph{
 				label:            "MemoryTrackingForMerges",
 				metricType:       "DERIVE",
 				drawType:         "AREA",
-				color:            "COLOUR0",
+				color:            "COLOUR1",
 				clickHouseMetric: "MemoryTrackingForMerges",
 			},
 		},
