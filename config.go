@@ -27,7 +27,7 @@ var AvailableGraphs = map[string]Graph{
 	"memory": {
 		graphTitle:    "ClickHouse memory",
 		graphCategory: "clickhouse",
-		graphInfo:     "Values received from ClickHouse system.events table",
+		graphInfo:     "Values received from ClickHouse system.metrics table",
 		graphLabel:    "memory",
 		graphPeriod:   "minute",
 		graphArgs:     "--lower-limit 0",
@@ -53,7 +53,7 @@ var AvailableGraphs = map[string]Graph{
 	"merges": {
 		graphTitle:    "ClickHouse merges",
 		graphCategory: "clickhouse",
-		graphInfo:     "Values received from ClickHouse system.events table",
+		graphInfo:     "Values received from ClickHouse system.metrics table",
 		graphLabel:    "merges",
 		graphPeriod:   "minute",
 		graphArgs:     "--lower-limit 0",
