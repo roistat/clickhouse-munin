@@ -46,11 +46,11 @@ func renderGraphData(g Graph) {
 	total := 0
 	if g.isPercent {
 		for _, m := range g.metrics {
-			total = total + stats[m.clickHouseEvent]
+			total = total + stats[m.clickHouseMetric]
 		}
 	}
 	for _, m := range g.metrics {
-		value := stats[m.clickHouseEvent]
+		value := stats[m.clickHouseMetric]
 		if g.isPercent {
 			calcValue := float64(value) / float64(total) * float64(100)
 			formattedValue := fmt.Sprintf("%.2f", calcValue)
@@ -68,15 +68,15 @@ func loadClickHouseStats() map[string]int {
 		host = "localhost"
 	}
 	conn := clickhouse.NewConn(host+":8123", clickhouse.NewHttpTransport())
-	query := clickhouse.NewQuery("SELECT event, value FROM system.events")
+	query := clickhouse.NewQuery("SELECT event AS metric, CAST(value AS UInt64) value FROM system.events UNION ALL SELECT metric, CAST(value AS UInt64) value FROM system.metrics")
 	iterator := query.Iter(conn)
 	var (
-		event string
-		value int
+		metric string
+		value  int
 	)
 	result := map[string]int{}
-	for iterator.Scan(&event, &value) {
-		result[event] = value
+	for iterator.Scan(&metric, &value) {
+		result[metric] = value
 	}
 	return result
 }
