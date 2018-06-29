@@ -43,8 +43,6 @@ cp bin/clickhouse_ /etc/munin/plugins/clickhouse_zookeeper
 cp bin/clickhouse_ /etc/munin/plugins/clickhouse_merges
 ```
 
-![](https://raw.githubusercontent.com/roistat/clickhouse-munin/master/examples/merges.png)
-
 
 #### Memory
 
