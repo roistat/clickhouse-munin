@@ -37,6 +37,21 @@ cp bin/clickhouse_ /etc/munin/plugins/clickhouse_zookeeper
 
 ![](https://raw.githubusercontent.com/roistat/clickhouse-munin/master/examples/zookeeper.png)
 
+#### Merges
+
+```bash
+cp bin/clickhouse_ /etc/munin/plugins/clickhouse_merges
+```
+
+![](https://raw.githubusercontent.com/roistat/clickhouse-munin/master/examples/merges.png)
+
+
+#### Memory
+
+```bash
+cp bin/clickhouse_ /etc/munin/plugins/clickhouse_memory
+```
+
 #### Make your own graph
 
 You could add you own graphs in config.go (AvailableGraphs variable)
